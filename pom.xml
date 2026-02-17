@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.4</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.audible</groupId>
+    <artifactId>audible-backend</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>backend</name>
+    <description>project for Spring Boot</description>
+    <url/>
+    <licenses>
+        <license/>
+    </licenses>
+
+    <developers>
+        <developer/>
+    </developers>
+
+    <scm>
+        <connection/>
+        <developerConnection/>
+        <tag/>
+        <url/>
+    </scm>
+
+    <properties>
+
+
+        <java.version>21</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <sonar.projectKey>audible-backend</sonar.projectKey>
+        <sonar.projectName>audible-backend</sonar.projectName>
+        <sonar.coverage.exclusions>
+            src/main/java/com/audible/exception/**,
+            src/main/java/com/audible/entity/**,
+            src/main/java/com/audible/dto/**,
+            src/main/java/com/audible/config/**,
+            src/main/java/com/audible/util/**,
+            src/main/java/com/audible/validation/**,
+            src/main/java/com/audible/utility/**,
+            src/main/java/com/audible/service/**,
+            src/main/java/com/audible/AudibleApplication*,
+            src/main/java/com/audible/repository/**
+        </sonar.coverage.exclusions>
+
+
+        <!--The below 2 lines ensures build fails if quality gate status fails-->
+
+        <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
+        <sonar.qualitygate.failOnSonarQubeExitCode>true</sonar.qualitygate.failOnSonarQubeExitCode>
+        <sonar.qualitygate.timeout>300</sonar.qualitygate.timeout>
+        <sonar.sources>src/main/java</sonar.sources>
+        <sonar.tests>src/test/java</sonar.tests>
+        <sonar.java.binaries>target/classes</sonar.java.binaries>
+        <sonar.java.test.binaries>target/test-classes</sonar.java.test.binaries>
+        <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
+        <sonar.issue.ignore.multicriteria>e1,e2</sonar.issue.ignore.multicriteria>
+        <sonar.issue.ignore.multicriteria.e1.ruleKey>java:S6813</sonar.issue.ignore.multicriteria.e1.ruleKey>
+        <sonar.issue.ignore.multicriteria.e1.resourceKey>**/*.java</sonar.issue.ignore.multicriteria.e1.resourceKey>
+        <sonar.issue.ignore.multicriteria.e2.ruleKey>java:S4502</sonar.issue.ignore.multicriteria.e2.ruleKey>
+        <sonar.issue.ignore.multicriteria.e2.resourceKey>**/*.java</sonar.issue.ignore.multicriteria.e2.resourceKey>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>3.2.4</version>
+        </dependency>
+
+        <dependency>
+
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <finalName>audible-backend</finalName>
+        <plugins>
+
+            <!-- used to package and run Spring Boot applications-->
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+
+            <!--used to execute unit tests -->
+
+            <plugin>
+
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.4</version> <!-- Latest version supporting JUnit 5 -->
+
+
+                <configuration>
+                    <failIfNoTests>false</failIfNoTests>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+
+            </plugin>
+
+
+            <!-- PMD plugin -->
+
+            <plugin>
+
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.28.0</version>
+                <configuration>
+
+                    <rulesets>
+                        <ruleset>${project.basedir}/RuleSet.xml</ruleset>
+                    </rulesets>
+                    <!-- Disable site reporting to avoid site.xml download error -->
+                    <skip>false</skip>
+
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+            </plugin>
+
+
+            <!-- Code Coverage Plugin -->
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.14</version>
+
+                <configuration>
+
+                    <!-- Exclude everything except service package from coverage -->
+
+                    <excludes>
+                        <exclude>com/audible/utility/**</exclude>
+                        <exclude>com/audible/dto/**</exclude>
+                        <exclude>com/audible/entity/**</exclude>
+                        <exclude>com/audible/exception/**</exclude>
+                        <exclude>com/audible/repository/**</exclude>
+                        <exclude>com/audible/util/**</exclude>
+                        <exclude>com/audible/utility/**</exclude>
+                        <exclude>com/audible/validation/**</exclude>
+                        <exclude>com/audible/config/**</exclude>
+                        <exclude>com/audible/service/**</exclude>
+                        <exclude>com/audible/AudibleApplication*</exclude>
+                    </excludes>
+
+                </configuration>
+
+                <executions>
+
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+
+                        <id>coverage-check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+
+                        <configuration>
+
+                            <!-- Only check coverage for service package -->
+
+                            <rules>
+                                <rule>
+
+                                    <element>PACKAGE</element>
+                                    <includes>
+                                        <include>com.audible.api.**</include>
+                                    </includes>
+
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.60</minimum>
+                                        </limit>
+
+                                        <limit>
+                                            <counter>BRANCH</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.60</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <!-- Sonar plugin -->
+
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>5.0.0.4389</version>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <!-- Deploying to Artifactory -->
+
+    <distributionManagement>
+
+        <repository>
+            <id>artifactory-repo</id>
+            <name>Artifactory Release Repository</name>
+            <url>http://cvwjeemys6:8082/artifactory/libs-release-local</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>artifactory-repo</id>
+            <name>Artifactory Snapshot Repository</name>
+            <url>http://cvwjeemys6:8082/artifactory/libs-snapshot-local</url>
+        </snapshotRepository>
+
+    </distributionManagement>
+</project>
