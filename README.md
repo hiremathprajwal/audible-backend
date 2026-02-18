@@ -1,8 +1,30 @@
-# Audible Backend
+🎧 **Audible Backend**
 
-Spring Boot REST API for the Audible audiobook platform.
+Spring Boot REST API for an audiobook platform similar to Audible.
+Provides authentication, cart checkout, payment handling, and personal library management.
 
-## Setup
+🧱 **Tech Stack**
+
+Java 17
+Spring Boot
+Spring Data JPA (Hibernate)
+MySQL
+Maven
+Log4j2
+JUnit, Mockito, MockMvc
+
+✨ **Core Features**
+
+Secure user authentication with BCrypt password hashing
+Password history validation (prevents reuse of last 3 passwords)
+Cart → Order checkout workflow
+Payment card discount system (5% debit, 10% credit)
+Automatic audiobook library update after purchase
+Global exception handling & validation
+Centralized logging with Log4j2
+CORS enabled for frontend integration
+
+⚙️ **Setup & Run**
 
 1. **Database Setup:**
    - Create MySQL database: `CREATE DATABASE audible_db;`
@@ -33,17 +55,15 @@ The API will run on http://localhost:8080
 - `PUT /customer/change-password` - Change password
 - `PUT /customer/forgot-password` - Forgot password
 
-### Audiobook APIs
-- `GET /audiobook/all-audiobooks` - Get all audiobooks
-- `GET /audiobook/view-audio/{audioId}` - Get audiobook by ID
-- `GET /audiobook/searchtitle/{title}/{author}` - Search audiobooks
-- `GET /audiobook/category/get/{pageNo}/{pageSize}/{sortBy}` - Get paginated audiobooks
-- `GET /audiobook/catalogue/{authorId}` - Get audiobooks by author
-- `GET /audiobook/authors` - Get all authors
-- `GET /audiobook/view-library/{customerId}` - View library
-- `POST /audiobook/add/{customerId}/{audioId}` - Add to library
-- `DELETE /audiobook/delete/{customerId}/{audioId}` - Remove from library
-- `POST /audiobook/addto-library/{customerId}` - Add all from cart to library
+### 📚 AudiobookAPIs
+| Method | Endpoint                               | Description                 |
+| ------ | -------------------------------------- | --------------------------- |
+| POST   | `/api/audiobooks`                      | Add a new audiobook         |
+| GET    | `/api/audiobooks/{audioId}`            | Get audiobook details by ID |
+| GET    | `/api/audiobooks`                      | Get all audiobooks          |
+| GET    | `/api/audiobooks/search?title={title}` | Search audiobooks by title  |
+| GET    | `/api/audiobooks/author/{authorId}`    | Get audiobooks by author    |
+
 
 ### Cart APIs
 - `GET /cart/viewcart/{customerId}` - View cart
