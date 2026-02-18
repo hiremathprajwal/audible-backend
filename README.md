@@ -1,9 +1,9 @@
-🎧 **Audible Backend**
+### 🎧 Audible Backend 
 
 Spring Boot REST API for an audiobook platform similar to Audible.
 Provides authentication, cart checkout, payment handling, and personal library management.
 
-🧱 **Tech Stack**
+### 🧱 Tech Stack
 
 Java 17
 Spring Boot
@@ -13,7 +13,7 @@ Maven
 Log4j2
 JUnit, Mockito, MockMvc
 
-✨ **Core Features**
+### ✨ Core Features
 
 Secure user authentication with BCrypt password hashing
 Password history validation (prevents reuse of last 3 passwords)
@@ -24,7 +24,7 @@ Global exception handling & validation
 Centralized logging with Log4j2
 CORS enabled for frontend integration
 
-⚙️ **Setup & Run**
+### ⚙️ Setup & Run
 
 1. **Database Setup:**
    - Create MySQL database: `CREATE DATABASE audible_db;`
@@ -48,14 +48,28 @@ The API will run on http://localhost:8080
 
 ## API Endpoints
 
-### Customer APIs
-- `POST /customer/register` - Register new customer
-- `POST /customer/login` - Login
-- `GET /customer/view-profile/{customerId}` - View profile
-- `PUT /customer/change-password` - Change password
-- `PUT /customer/forgot-password` - Forgot password
+### 👤 Customer APIs
+| Method | Endpoint                             | Description           |
+| ------ | ------------------------------------ | --------------------- |
+| POST   | `/api/customers/register`            | Register new customer |
+| POST   | `/api/customers/login`               | Login user            |
+| GET    | `/api/customers/{customerId}`        | Get customer by ID    |
+| GET    | `/api/customers/email/{email}`       | Get customer by email |
+| GET    | `/api/customers`                     | Get all customers     |
+| PUT    | `/api/customers/change-password`     | Change password       |
+| PUT    | `/api/customers/forgot-password`     | Reset password        |
+| GET    | `/api/customers/username/{username}` | Get email by username |
 
-### 📚 AudiobookAPIs
+### ✍️ Author APIs
+
+| Method | Endpoint                  | Description      |
+| ------ | ------------------------- | ---------------- |
+| POST   | `/api/authors`            | Add new author   |
+| GET    | `/api/authors/{authorId}` | Get author by ID |
+| GET    | `/api/authors`            | Get all authors  |
+
+
+### 📚 Audiobook APIs
 | Method | Endpoint                               | Description                 |
 | ------ | -------------------------------------- | --------------------------- |
 | POST   | `/api/audiobooks`                      | Add a new audiobook         |
@@ -65,15 +79,48 @@ The API will run on http://localhost:8080
 | GET    | `/api/audiobooks/author/{authorId}`    | Get audiobooks by author    |
 
 
-### Cart APIs
-- `GET /cart/viewcart/{customerId}` - View cart
-- `POST /cart/addtocart/{customerId}/{audioId}` - Add to cart
-- `DELETE /cart/remove/{customerId}/{audioId}` - Remove from cart
+### 🛒 Cart APIs
+| Method | Endpoint                                   | Description                |
+| ------ | ------------------------------------------ | -------------------------- |
+| GET    | `/api/carts/{customerId}`                  | View customer cart         |
+| POST   | `/api/carts/{customerId}/add/{audioId}`    | Add audiobook to cart      |
+| DELETE | `/api/carts/{customerId}/remove/{audioId}` | Remove audiobook from cart |
+| DELETE | `/api/carts/{customerId}/clear`            | Clear entire cart          |
 
-### Payment APIs
-- `POST /payment/add-card` - Add payment card
-- `GET /payment/saved-cards/{customerId}` - Get saved cards
-- `POST /payment/process` - Process payment
+
+### 💳 Payment Card APIs
+| Method | Endpoint                                   | Description                        |
+| ------ | ------------------------------------------ | ---------------------------------- |
+| POST   | `/api/payment-cards`                       | Add a new payment card             |
+| DELETE | `/api/payment-cards/{cardId}`              | Delete payment card                |
+| GET    | `/api/payment-cards/customer/{customerId}` | Get all saved cards for a customer |
+
+### ⭐ Wishlist APIs
+| Method | Endpoint                               | Description                    |
+| ------ | -------------------------------------- | ------------------------------ |
+| POST   | `/api/wishlist/{customerId}/{audioId}` | Add audiobook to wishlist      |
+| DELETE | `/api/wishlist/{customerId}/{audioId}` | Remove audiobook from wishlist |
+| GET    | `/api/wishlist/{customerId}`           | View customer wishlist         |
+
+### 📦 Order APIs
+| Method | Endpoint                                                | Description                                                |
+| ------ | ------------------------------------------------------- | ---------------------------------------------------------- |
+| POST   | `/api/orders/{customerId}/place?paymentMethod={method}` | Place order from cart (Credit/Debit card discount applied) |
+| GET    | `/api/orders/{customerId}`                              | Get order history for customer                             |
+
+### 📚 Library APIs
+| Method | Endpoint                              | Description                              |
+| ------ | ------------------------------------- | ---------------------------------------- |
+| GET    | `/api/library/{customerId}`           | View purchased audiobooks (user library) |
+| DELETE | `/api/library/{customerId}/{audioId}` | Remove audiobook from library            |
+
+### 🧩 Architecture
+
+Layered architecture (Controller → Service → Repository)
+DTO pattern implementation
+Global exception advisor
+AOP-based logging
+Unit & API testing
 
 ## Features
 
